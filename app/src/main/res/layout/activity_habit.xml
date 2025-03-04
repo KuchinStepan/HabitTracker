@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="12dp"
+    tools:context=".HabitActivity">
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Название привычки"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="28dp" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Описание"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/etTitle"/>
+
+    <Spinner
+        android:id="@+id/spinnerPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etDescription"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/spinnerPriority"
+        android:layout_margin="16dp">
+
+        <RadioButton
+            android:id="@+id/rbGood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Хорошая привычка"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rbBad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Плохая привычка"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Количество раз в день"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupType"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/etFrequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Периодичность (дней)"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/etCount"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Сохранить"
+        app:layout_constraintTop_toBottomOf="@+id/etFrequency" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
