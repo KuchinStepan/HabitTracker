@@ -13,11 +13,13 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.habittracker.models.Habit
 import com.example.habittracker.types.HabitPriority
+import com.example.habittracker.types.HabitType
 
 class HabitActivity : AppCompatActivity() {
     private var habit: Habit? = null
     private var index: Int = -1
     private var priority: HabitPriority = HabitPriority.High
+    private var type: HabitType = HabitType.Good
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +42,14 @@ class HabitActivity : AppCompatActivity() {
             etDescription.setText(it.description)
             etCount.setText(it.count.toString())
             etFrequency.setText(it.frequency.toString())
+            rgType.check(it.type.id)
+        }
+
+        rgType.setOnCheckedChangeListener { _, id ->
+            type = HabitType.entries.first { entry -> entry.id == id }
         }
 
         val priorityList = HabitPriority.entries.map { it.stringValue }
-
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -72,7 +78,7 @@ class HabitActivity : AppCompatActivity() {
                 etTitle.text.toString(),
                 etDescription.text.toString(),
                 priority,
-                "Хорошая",
+                type,
                 if (etCount.text.isNotEmpty()) etCount.text.length.toString().toInt() else 0,
                 if (etFrequency.text.isNotEmpty()) etFrequency.text.length.toString().toInt() else 0,
                 0xFF00FF
