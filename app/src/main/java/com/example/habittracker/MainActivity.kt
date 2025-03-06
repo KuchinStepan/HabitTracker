@@ -1,7 +1,10 @@
 package com.example.habittracker
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val activityResultLauncher = getActivityResultLauncher()
+
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val fabAddHabit = findViewById<FloatingActionButton>(R.id.fabAddHabit)
@@ -26,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HabitActivity::class.java)
             intent.putExtra("habit", habit)
             intent.putExtra("index", index)
-            startActivityForResult(intent, 100)
+            activityResultLauncher.launch(intent)
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -38,20 +43,22 @@ class MainActivity : AppCompatActivity() {
 
         fabAddHabit.setOnClickListener {
             val intent = Intent(this, HabitActivity::class.java)
-            startActivityForResult(intent, 100)
+            activityResultLauncher.launch(intent)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100 && resultCode == RESULT_OK) {
-            val habit = data?.getSerializableExtra("habit") as? Habit
-            val index = data?.getIntExtra("index", -1) ?: -1
-            if (habit != null) {
-                if (index == -1) {
-                    viewModel.addHabit(habit)
-                } else {
-                    viewModel.updateHabit(index, habit)
+    private fun getActivityResultLauncher(): ActivityResultLauncher<Intent> {
+        return registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val habit = data?.getSerializableExtra("habit") as? Habit
+                val index = data?.getIntExtra("index", -1) ?: -1
+                if (habit != null) {
+                    if (index == -1) {
+                        viewModel.addHabit(habit)
+                    } else {
+                        viewModel.updateHabit(index, habit)
+                    }
                 }
             }
         }

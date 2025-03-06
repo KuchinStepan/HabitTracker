@@ -31,7 +31,7 @@ class HabitActivity : AppCompatActivity() {
         index = intent.getIntExtra("index", -1)
         priority = habit?.priority ?: HabitPriority.High
 
-        val priorityList = HabitPriority.entries.map { it.value }
+        val priorityList = HabitPriority.entries.map { it.stringValue }
 
         ArrayAdapter(
             this,
