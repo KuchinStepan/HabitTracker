@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.habittracker.models.Habit
@@ -16,7 +17,7 @@ import com.example.habittracker.types.HabitPriority
 class HabitActivity : AppCompatActivity() {
     private var habit: Habit? = null
     private var index: Int = -1
-    private lateinit var priority: HabitPriority
+    private var priority: HabitPriority = HabitPriority.High
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +25,22 @@ class HabitActivity : AppCompatActivity() {
 
         val etTitle = findViewById<EditText>(R.id.etTitle)
         val etDescription = findViewById<EditText>(R.id.etDescription)
+        val spinner = findViewById<Spinner>(R.id.spinnerPriority)
+        val rgType = findViewById<RadioGroup>(R.id.rgType)
+        val etCount = findViewById<EditText>(R.id.etCount)
+        val etFrequency = findViewById<EditText>(R.id.etFrequency)
         val btnSave = findViewById<Button>(R.id.btnSave)
-        val spinner: Spinner = findViewById(R.id.spinnerPriority)
 
         habit = intent.getSerializableExtra("habit") as? Habit
         index = intent.getIntExtra("index", -1)
-        priority = habit?.priority ?: HabitPriority.High
+
+        habit?.let {
+            priority = it.priority
+            etTitle.setText(it.title)
+            etDescription.setText(it.description)
+            etCount.setText(it.count.toString())
+            etFrequency.setText(it.frequency.toString())
+        }
 
         val priorityList = HabitPriority.entries.map { it.stringValue }
 
@@ -56,19 +67,14 @@ class HabitActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
 
-        habit?.let {
-            etTitle.setText(it.title)
-            etDescription.setText(it.description)
-        }
-
         btnSave.setOnClickListener {
             val newHabit = Habit(
                 etTitle.text.toString(),
                 etDescription.text.toString(),
                 priority,
                 "Хорошая",
-                3,
-                7,
+                if (etCount.text.isNotEmpty()) etCount.text.length.toString().toInt() else 0,
+                if (etFrequency.text.isNotEmpty()) etFrequency.text.length.toString().toInt() else 0,
                 0xFF00FF
             )
 

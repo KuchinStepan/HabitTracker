@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         val activityResultLauncher = getActivityResultLauncher()
 
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val fabAddHabit = findViewById<FloatingActionButton>(R.id.fabAddHabit)
 
