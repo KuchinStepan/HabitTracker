@@ -25,6 +25,19 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="#777777"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvHabitCardType"
+                style="@style/item_habit_additional_textView"/>
+
+            <TextView
+                style="@style/item_habit_additional_textView"
+                android:id="@+id/tvHabitPriority"/>
+        </LinearLayout>
     </LinearLayout>
 
 

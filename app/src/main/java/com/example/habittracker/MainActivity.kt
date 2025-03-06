@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         viewModel.updateHabit(index, habit)
                     }
+                    adapter.notifyDataSetChanged()
                 }
-                adapter.notifyDataSetChanged()
             }
         }
     }

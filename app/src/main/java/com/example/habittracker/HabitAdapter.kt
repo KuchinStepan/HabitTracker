@@ -32,10 +32,14 @@ class HabitAdapter(private val onItemClick: (Habit, Int) -> Unit) :
     inner class HabitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.tvHabitCardTitle)
         private val description: TextView = itemView.findViewById(R.id.tvHabitCardDescription)
+        private val priority: TextView = itemView.findViewById(R.id.tvHabitPriority)
+        private val type: TextView = itemView.findViewById(R.id.tvHabitCardType)
 
         fun bind(habit: Habit) {
             title.text = habit.title
             description.text = habit.description
+            priority.text = habit.priority.stringValue
+            type.text = habit.type.stringValue
         }
     }
 }
