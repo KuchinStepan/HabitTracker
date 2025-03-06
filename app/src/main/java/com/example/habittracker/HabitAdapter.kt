@@ -30,8 +30,8 @@ class HabitAdapter(private val onItemClick: (Habit, Int) -> Unit) :
     override fun getItemCount() = habits.size
 
     inner class HabitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title: TextView = itemView.findViewById(R.id.habitCardTitle)
-        private val description: TextView = itemView.findViewById(R.id.habitCardDescription)
+        private val title: TextView = itemView.findViewById(R.id.tvHabitCardTitle)
+        private val description: TextView = itemView.findViewById(R.id.tvHabitCardDescription)
 
         fun bind(habit: Habit) {
             title.text = habit.title

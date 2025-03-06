@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/etDescription"/>
 
     <RadioGroup
-        android:id="@+id/radioGroupType"
+        android:id="@+id/rgType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/spinnerPriority"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:hint="Количество раз в день"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupType"
+        app:layout_constraintTop_toBottomOf="@id/rgType"
         android:layout_margin="16dp"/>
 
     <EditText
@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Сохранить"
-        app:layout_constraintTop_toBottomOf="@+id/etFrequency" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
