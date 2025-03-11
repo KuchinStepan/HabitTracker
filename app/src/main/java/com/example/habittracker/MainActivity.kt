@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        adapter.submitList(viewModel.habits)
+        viewModel.habits.observe(this) { habits ->
+            adapter.submitList(habits)
+        }
 
         fabAddHabit.setOnClickListener {
             val intent = Intent(this, HabitActivity::class.java)
@@ -57,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         viewModel.updateHabit(index, habit)
                     }
-                    adapter.notifyDataSetChanged()
                 }
             }
         }
