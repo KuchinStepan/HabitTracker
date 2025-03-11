@@ -3,25 +3,17 @@ package com.example.habittracker
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Spinner
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.habittracker.constants.IntentExtraKeys
 import com.example.habittracker.models.Habit
-import com.example.habittracker.types.HabitPriority
-import com.example.habittracker.types.HabitType
-import com.example.habittracker.types.getStringValue
 
 class HabitActivity : AppCompatActivity() {
-    private var habit: Habit? = null
-    private var index: Int = -1
-    private var priority: HabitPriority = HabitPriority.High
-    private var type: HabitType = HabitType.Good
+    private val viewModel: HabitActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +27,11 @@ class HabitActivity : AppCompatActivity() {
         val etFrequency = findViewById<EditText>(R.id.etFrequency)
         val btnSave = findViewById<Button>(R.id.btnSave)
 
-        habit = intent.getSerializableExtra(IntentExtraKeys.HABIT) as? Habit
-        index = intent.getIntExtra(IntentExtraKeys.INDEX, -1)
+        viewModel.habit = intent.getSerializableExtra(IntentExtraKeys.HABIT) as? Habit
+        viewModel.index = intent.getIntExtra(IntentExtraKeys.INDEX, -1)
 
-        habit?.let {
-            priority = it.priority
+        viewModel.habit?.let {
+            viewModel.priority = it.priority
             etTitle.setText(it.title)
             etDescription.setText(it.description)
             etCount.setText(it.count.toString())
@@ -48,39 +40,17 @@ class HabitActivity : AppCompatActivity() {
         }
 
         rgType.setOnCheckedChangeListener { _, id ->
-            type = HabitType.entries.first { entry -> entry.id == id }
+            viewModel.onTypeChecked(id)
         }
 
-        val priorityList = HabitPriority.entries.map { it.getStringValue(this) }
-        ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            priorityList
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
-
-        spinner.setSelection(priority.index)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                priority = HabitPriority.entries[position]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) { }
-        }
+        viewModel.setupSpinner(this, spinner)
 
         btnSave.setOnClickListener {
             val newHabit = Habit(
                 etTitle.text.toString(),
                 etDescription.text.toString(),
-                priority,
-                type,
+                viewModel.priority,
+                viewModel.type,
                 if (etCount.text.isNotEmpty()) etCount.text.length.toString().toInt() else 0,
                 if (etFrequency.text.isNotEmpty()) etFrequency.text.length.toString().toInt() else 0,
                 0xFF00FF
@@ -88,7 +58,7 @@ class HabitActivity : AppCompatActivity() {
 
             val resultIntent = Intent()
             resultIntent.putExtra(IntentExtraKeys.HABIT, newHabit)
-            resultIntent.putExtra(IntentExtraKeys.INDEX, index)
+            resultIntent.putExtra(IntentExtraKeys.INDEX, viewModel.index)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }

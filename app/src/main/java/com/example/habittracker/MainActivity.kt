@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: HabitViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var adapter: HabitAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,7 +3,7 @@ package com.example.habittracker
 import androidx.lifecycle.ViewModel
 import com.example.habittracker.models.Habit
 
-class HabitViewModel : ViewModel() {
+class MainActivityViewModel : ViewModel() {
     private val _habits: MutableList<Habit> = mutableListOf()
     val habits = _habits
 
