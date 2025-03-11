@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.habittracker.constants.IntentExtraKeys
 import com.example.habittracker.models.Habit
 import com.example.habittracker.types.HabitPriority
 import com.example.habittracker.types.HabitType
@@ -33,8 +34,8 @@ class HabitActivity : AppCompatActivity() {
         val etFrequency = findViewById<EditText>(R.id.etFrequency)
         val btnSave = findViewById<Button>(R.id.btnSave)
 
-        habit = intent.getSerializableExtra("habit") as? Habit
-        index = intent.getIntExtra("index", -1)
+        habit = intent.getSerializableExtra(IntentExtraKeys.HABIT) as? Habit
+        index = intent.getIntExtra(IntentExtraKeys.INDEX, -1)
 
         habit?.let {
             priority = it.priority
@@ -85,8 +86,8 @@ class HabitActivity : AppCompatActivity() {
             )
 
             val resultIntent = Intent()
-            resultIntent.putExtra("habit", newHabit)
-            resultIntent.putExtra("index", index)
+            resultIntent.putExtra(IntentExtraKeys.HABIT, newHabit)
+            resultIntent.putExtra(IntentExtraKeys.INDEX, index)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }

@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.habittracker.constants.IntentExtraKeys
 import com.example.habittracker.models.Habit
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         adapter = HabitAdapter { habit, index ->
             val intent = Intent(this, HabitActivity::class.java)
-            intent.putExtra("habit", habit)
-            intent.putExtra("index", index)
+            intent.putExtra(IntentExtraKeys.HABIT, habit)
+            intent.putExtra(IntentExtraKeys.INDEX, index)
             activityResultLauncher.launch(intent)
         }
 
@@ -48,8 +49,8 @@ class MainActivity : AppCompatActivity() {
         return registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
-                val habit = data?.getSerializableExtra("habit") as? Habit
-                val index = data?.getIntExtra("index", -1) ?: -1
+                val habit = data?.getSerializableExtra(IntentExtraKeys.HABIT) as? Habit
+                val index = data?.getIntExtra(IntentExtraKeys.INDEX, -1) ?: -1
                 if (habit != null) {
                     if (index == -1) {
                         viewModel.addHabit(habit)
