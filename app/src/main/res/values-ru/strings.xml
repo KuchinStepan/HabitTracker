@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Трекер привычек</string>
+    <string name="high_priority">Высокий приоритет</string>
+    <string name="medium_priority">Средний приоритет</string>
+    <string name="low_priority">Низкий приоритет</string>
+    <string name="type_bad">Плохая</string>
+    <string name="type_good">Хорошая</string>
+</resources>

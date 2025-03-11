@@ -15,6 +15,7 @@ import com.example.habittracker.constants.IntentExtraKeys
 import com.example.habittracker.models.Habit
 import com.example.habittracker.types.HabitPriority
 import com.example.habittracker.types.HabitType
+import com.example.habittracker.types.getStringValue
 
 class HabitActivity : AppCompatActivity() {
     private var habit: Habit? = null
@@ -50,7 +51,7 @@ class HabitActivity : AppCompatActivity() {
             type = HabitType.entries.first { entry -> entry.id == id }
         }
 
-        val priorityList = HabitPriority.entries.map { it.stringValue }
+        val priorityList = HabitPriority.entries.map { it.getStringValue(this) }
         ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,

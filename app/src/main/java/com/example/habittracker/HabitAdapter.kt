@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.habittracker.models.Habit
+import com.example.habittracker.types.getStringValue
 
 class HabitAdapter(private val onItemClick: (Habit, Int) -> Unit) :
     RecyclerView.Adapter<HabitAdapter.HabitViewHolder>() {
@@ -38,8 +39,8 @@ class HabitAdapter(private val onItemClick: (Habit, Int) -> Unit) :
         fun bind(habit: Habit) {
             title.text = habit.title
             description.text = habit.description
-            priority.text = habit.priority.stringValue
-            type.text = habit.type.stringValue
+            priority.text = habit.priority.getStringValue(itemView.context)
+            type.text = habit.type.getStringValue(itemView.context)
         }
     }
 }
