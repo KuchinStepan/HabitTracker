@@ -5,4 +5,13 @@
     <string name="low_priority">Low priority</string>
     <string name="type_bad">Bad</string>
     <string name="type_good">Good</string>
+
+    <string name="habit_title">Habit title</string>
+    <string name="description">Description</string>
+    <string name="frequency">Frequency (days)</string>
+    <string name="times_per_day">Number of times per day</string>
+    <string name="good_habit">Good habit</string>
+    <string name="bad_habit">Bad habit</string>
+
+    <string name="save">Save</string>
 </resources>

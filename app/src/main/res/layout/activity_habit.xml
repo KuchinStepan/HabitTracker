@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Название привычки"
+        android:hint="@string/habit_title"
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="28dp" />
@@ -21,7 +21,7 @@
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Описание"
+        android:hint="@string/description"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="text"
@@ -45,21 +45,21 @@
             android:id="@+id/rbGood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Хорошая привычка"
+            android:text="@string/good_habit"
             android:checked="true"/>
 
         <RadioButton
             android:id="@+id/rbBad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Плохая привычка"/>
+            android:text="@string/bad_habit"/>
     </RadioGroup>
 
     <EditText
         android:id="@+id/etCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Количество раз в день"
+        android:hint="@string/times_per_day"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/rgType"
         android:layout_margin="16dp"/>
@@ -68,7 +68,7 @@
         android:id="@+id/etFrequency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Периодичность (дней)"
+        android:hint="@string/frequency"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/etCount"
         android:layout_margin="16dp"/>
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Сохранить"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="12dp" />
 

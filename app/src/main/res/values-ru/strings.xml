@@ -6,4 +6,13 @@
     <string name="low_priority">Низкий приоритет</string>
     <string name="type_bad">Плохая</string>
     <string name="type_good">Хорошая</string>
+
+    <string name="habit_title">Название привычки</string>
+    <string name="description">Описание</string>
+    <string name="frequency">Периодичность (дней)</string>
+    <string name="times_per_day">Количество раз в день</string>
+    <string name="good_habit">Хорошая привычка</string>
+    <string name="bad_habit">Плохая привычка</string>
+
+    <string name="save">Сохранить</string>
 </resources>
